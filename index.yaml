@@ -1,0 +1,575 @@
+---
+apiVersion: v1
+entries:
+  keiailab-commons:
+  - annotations:
+      artifacthub.io/category: integration-delivery
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/KeiaiLab/keiailab-commons/blob/main/README.md
+        - name: Source Code
+          url: https://github.com/KeiaiLab/keiailab-commons
+        - name: Design Assets
+          url: https://github.com/KeiaiLab/keiailab-commons/blob/main/docs/BRANDING.md
+      artifacthub.io/screenshots: |
+        - title: Keiailab Commons centered service symbol
+          url: https://raw.githubusercontent.com/KeiaiLab/keiailab-commons/main/docs/branding/symbol.png
+      artifacthub.io/signKey: |
+        fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
+        url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
+    apiVersion: v2
+    appVersion: 0.8.0
+    created: '2026-06-15T11:56:28.589092+09:00'
+    description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
+      partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
+      library — consumer chart 가 dependency 로 import. '
+    digest: 611550875f3a096d3414dc864077bf754e9e029c396784b425036ede9bf887f8
+    home: https://github.com/keiailab/keiailab-commons
+    icon: https://raw.githubusercontent.com/KeiaiLab/keiailab-commons/main/docs/branding/symbol.png
+    keywords:
+    - keiailab
+    - library
+    - operator-helpers
+    - servicemonitor
+    - rbac
+    - external-secrets
+    kubeVersion: ">=1.25.0-0"
+    maintainers:
+    - name: keiailab
+      url: https://github.com/keiailab
+    name: keiailab-commons
+    sources:
+    - https://github.com/keiailab/keiailab-commons/tree/main/charts/keiailab-commons
+    type: library
+    urls:
+    - oci://ghcr.io/keiailab/charts/keiailab-commons:0.8.1
+    version: 0.8.1
+  mongodb-operator:
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: "Publish a fresh signed OCI chart version after Artifact Hub cached the 1.12.4 unsigned metadata."
+        - kind: changed
+          description: "Add opt-in ExternalSecret rendering for MongoDB admin/app/S3 credentials while keeping operator appVersion/image at v1.12.2."
+      artifacthub.io/containsSecurityUpdates: 'false'
+      artifacthub.io/crds: |
+        - kind: MongoDB
+          version: v1alpha1
+          name: mongodbs.mongodb.keiailab.com
+          displayName: MongoDB ReplicaSet
+          description: Deploys and manages a MongoDB ReplicaSet cluster
+        - kind: MongoDBSharded
+          version: v1alpha1
+          name: mongodbshardeds.mongodb.keiailab.com
+          displayName: MongoDB Sharded Cluster
+          description: Deploys and manages a MongoDB Sharded cluster with config servers, shards, and mongos routers
+        - kind: MongoDBBackup
+          version: v1alpha1
+          name: mongodbbackups.mongodb.keiailab.com
+          displayName: MongoDB Backup
+          description: Creates and manages MongoDB backups to S3 or PVC storage
+      artifacthub.io/crdsExamples: |
+        - apiVersion: mongodb.keiailab.com/v1alpha1
+          kind: MongoDB
+          metadata:
+            name: my-mongodb
+            namespace: database
+          spec:
+            members: 3
+            version:
+              version: "8.3.1"
+            storage:
+              storageClassName: standard
+              size: 10Gi
+            auth:
+              mechanism: SCRAM-SHA-256
+              adminCredentialsSecretRef:
+                name: mongodb-admin
+            monitoring:
+              enabled: true
+        - apiVersion: mongodb.keiailab.com/v1alpha1
+          kind: MongoDBSharded
+          metadata:
+            name: my-sharded
+            namespace: database
+          spec:
+            version:
+              version: "8.3.1"
+            configServer:
+              members: 3
+              storage:
+                size: 5Gi
+            shards:
+              count: 2
+              membersPerShard: 3
+              storage:
+                size: 20Gi
+            mongos:
+              replicas: 2
+        - apiVersion: mongodb.keiailab.com/v1alpha1
+          kind: MongoDBBackup
+          metadata:
+            name: my-backup
+            namespace: database
+          spec:
+            clusterRef:
+              name: my-mongodb
+              kind: MongoDB
+            type: full
+            compression: true
+            storage:
+              type: s3
+              s3:
+                bucket: mongodb-backups
+                endpoint: https://s3.amazonaws.com
+                credentialsRef:
+                  name: s3-credentials
+      artifacthub.io/images: |
+        - name: mongodb-operator
+          image: ghcr.io/keiailab/mongodb-operator:v1.12.2
+        - name: mongodb
+          image: mongo:8.3.1
+        - name: mongodb-exporter
+          image: percona/mongodb_exporter:0.51.0
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/keiailab/mongodb-operator/blob/main/README.md
+        - name: Source Code
+          url: https://github.com/keiailab/mongodb-operator
+        - name: MongoDB Documentation
+          url: https://www.mongodb.com/docs/
+        - name: Design Assets
+          url: https://github.com/KeiaiLab/mongodb-operator/blob/main/docs/BRANDING.md
+      artifacthub.io/maturity: stable
+      artifacthub.io/operator: 'true'
+      artifacthub.io/operatorCapabilities: Auto Pilot
+      artifacthub.io/prerelease: 'false'
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+        - url: https://artifacthub.io/packages/helm/cert-manager/cert-manager
+      artifacthub.io/screenshots: |
+        - title: Keiailab MongoDB Operator centered service symbol
+          url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
+        - title: Keiailab MongoDB Operator social cover
+          url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/cover.png
+      artifacthub.io/signKey: |
+        fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
+        url: https://raw.githubusercontent.com/keiailab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
+    apiVersion: v2
+    appVersion: 1.12.2
+    created: '2026-06-15T11:56:28.604091+09:00'
+    dependencies:
+    - name: keiailab-commons
+      repository: oci://ghcr.io/keiailab/charts
+      version: 0.8.0
+    description: A Kubernetes Operator for managing MongoDB ReplicaSets and Sharded
+      Clusters (v1.0.0 GA Release)
+    digest: 6a49a0bbf34ff839194c15beacbe62542d6a54e786583ef5b5d31a8464d47361
+    home: https://github.com/keiailab/mongodb-operator
+    icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - operator
+    - replicaset
+    - sharded-cluster
+    - backup
+    - kubernetes
+    - external-secrets
+    kubeVersion: ">=1.26.0-0"
+    maintainers:
+    - email: support@keiailab.com
+      name: Keiailab
+      url: https://keiailab.com
+    name: mongodb-operator
+    sources:
+    - https://github.com/keiailab/mongodb-operator
+    type: application
+    urls:
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.12.7
+    version: 1.12.7
+  postgres-operator:
+  - annotations:
+      artifacthub.io/alternativeName: keiailab-postgres-operator
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
+          description: "Add opt-in ExternalSecret rendering for PostgresUser, Pooler, and external replica-source credentials while keeping operator appVersion/image at 0.4.0-beta.1."
+      artifacthub.io/crds: |
+        - kind: PostgresCluster
+          version: v1alpha1
+          name: postgresclusters.postgres.keiailab.io
+          displayName: PostgresCluster
+          description: coordinator, worker pool, stateless router 로 구성된 자체 분산 PostgreSQL 토폴로지를 선언한다 (vanilla PG18 default, ADR 0001 자체 분산 SQL).
+        - kind: ImageCatalog
+          version: v1alpha1
+          name: imagecatalogs.postgres.keiailab.io
+          displayName: ImageCatalog
+          description: namespace 범위 PostgreSQL runtime image catalog 를 선언한다
+        - kind: ClusterImageCatalog
+          version: v1alpha1
+          name: clusterimagecatalogs.postgres.keiailab.io
+          displayName: ClusterImageCatalog
+          description: cluster 전체에서 공유할 PostgreSQL runtime image catalog 를 선언한다
+        - kind: BackupJob
+          version: v1alpha1
+          name: backupjobs.postgres.keiailab.io
+          displayName: BackupJob
+          description: PostgresCluster 대상의 단일 백업 또는 복구 실행 요청을 선언한다
+        - kind: ScheduledBackup
+          version: v1alpha1
+          name: scheduledbackups.postgres.keiailab.io
+          displayName: ScheduledBackup
+          description: cron schedule 에 따라 PostgresCluster 대상 BackupJob 을 생성한다
+        - kind: Pooler
+          version: v1alpha1
+          name: poolers.postgres.keiailab.io
+          displayName: Pooler
+          description: PostgresCluster 대상 PgBouncer connection pool 계층을 선언한다
+        - kind: PostgresDatabase
+          version: v1alpha1
+          name: postgresdatabases.postgres.keiailab.io
+          displayName: PostgresDatabase
+          description: ready primary Pod 의 psql 로 database, tablespace, schema, extension, FDW, foreign server 선언을 적용한다
+        - kind: PostgresUser
+          version: v1alpha1
+          name: postgresusers.postgres.keiailab.io
+          displayName: PostgresUser
+          description: ready primary Pod 의 psql 로 PostgreSQL role flags, membership, password, validUntil 을 적용한다
+      artifacthub.io/crdsExamples: |
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: ImageCatalog
+          metadata:
+            name: postgresql
+            namespace: default
+          spec:
+            images:
+              - major: 18
+                image: ghcr.io/keiailab/pg:18
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: ClusterImageCatalog
+          metadata:
+            name: postgresql-standard
+          spec:
+            images:
+              - major: 17
+                image: ghcr.io/keiailab/pg:17
+              - major: 18
+                image: ghcr.io/keiailab/pg:18
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: PostgresCluster
+          metadata:
+            name: quickstart
+            namespace: default
+          spec:
+            imageCatalogRef:
+              apiGroup: postgres.keiailab.io
+              kind: ImageCatalog
+              name: postgresql
+              major: 18
+            shardingMode: none
+            shards:
+              initialCount: 1
+              replicas: 1
+              storage:
+                size: 10Gi
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: BackupJob
+          metadata:
+            name: quickstart-full-backup
+            namespace: default
+          spec:
+            cluster:
+              name: quickstart
+            tool: pgbackrest
+            repo: repo1
+            type: full
+            executionMode: job
+            jobTemplate:
+              spec:
+                backoffLimit: 1
+                template:
+                  spec:
+                    restartPolicy: Never
+                    containers:
+                      - name: pgbackrest
+                        image: ghcr.io/keiailab/pg:18
+                        command: ["/bin/sh", "-c"]
+                        args:
+                          - pgbackrest --stanza="${POSTGRES_CLUSTER_NAME}" --repo="${BACKUP_REPO}" backup --type="${BACKUP_TYPE}"
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: ScheduledBackup
+          metadata:
+            name: quickstart-nightly-backup
+            namespace: default
+          spec:
+            schedule: "0 0 2 * * *"
+            cluster:
+              name: quickstart
+            tool: pgbackrest
+            repo: repo1
+            type: full
+            executionMode: job
+            backupOwnerReference: self
+            jobTemplate:
+              spec:
+                backoffLimit: 1
+                template:
+                  spec:
+                    restartPolicy: Never
+                    containers:
+                      - name: pgbackrest
+                        image: ghcr.io/keiailab/pg:18
+                        command: ["/bin/sh", "-c"]
+                        args:
+                          - pgbackrest --stanza="${POSTGRES_CLUSTER_NAME}" --repo="${BACKUP_REPO}" backup --type="${BACKUP_TYPE}"
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: Pooler
+          metadata:
+            name: quickstart-rw
+            namespace: default
+          spec:
+            cluster:
+              name: quickstart
+            instances: 3
+            type: rw
+            pgbouncer:
+              image: ghcr.io/cloudnative-pg/pgbouncer:1.24.1
+              poolMode: transaction
+              authSecretRef:
+                name: quickstart-pooler-auth
+              parameters:
+                max_client_conn: "1000"
+                default_pool_size: "20"
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: PostgresUser
+          metadata:
+            name: quickstart-app
+            namespace: default
+          spec:
+            cluster:
+              name: quickstart
+            name: app
+            login: true
+            createdb: true
+            connectionLimit: 25
+            validUntil: infinity
+            inRoles:
+              - readonly
+              - writers
+        - apiVersion: postgres.keiailab.io/v1alpha1
+          kind: PostgresDatabase
+          metadata:
+            name: quickstart-appdb
+            namespace: default
+          spec:
+            cluster:
+              name: quickstart
+            name: appdb
+            owner: app
+            databaseReclaimPolicy: retain
+            privileges:
+              - role: app
+                privileges: [CONNECT, TEMPORARY]
+            schemas:
+              - name: app
+                owner: app
+                privileges:
+                  - role: app
+                    privileges: [USAGE, CREATE]
+            extensions:
+              - name: pgcrypto
+      artifacthub.io/images: |
+        - name: manager
+          image: ghcr.io/keiailab/postgres-operator:0.4.0-beta.1
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/keiailab/postgres-operator/blob/main/README.md
+        - name: Source Code
+          url: https://github.com/keiailab/postgres-operator
+        - name: Release Process
+          url: https://github.com/keiailab/postgres-operator/blob/main/docs/releases/release-process.md
+        - name: Design Assets
+          url: https://github.com/KeiaiLab/postgres-operator/blob/main/docs/BRANDING.md
+      artifacthub.io/maturity: beta
+      artifacthub.io/operator: 'true'
+      artifacthub.io/operatorCapabilities: Deep Insights
+      artifacthub.io/prerelease: 'true'
+      artifacthub.io/screenshots: |
+        - title: Keiailab Postgres Operator centered service symbol
+          url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/symbol.png
+        - title: Keiailab Postgres Operator light wordmark
+          url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
+    apiVersion: v2
+    appVersion: 0.4.0-beta.1
+    created: '2026-06-15T11:56:28.610714+09:00'
+    dependencies:
+    - name: keiailab-commons
+      repository: oci://ghcr.io/keiailab/charts
+      version: 0.8.0
+    description: 'MIT-licensed PostgreSQL Kubernetes Operator. PGO-class operational
+      quality is the target, but external operators/backends are not forked, embedded,
+      or wrapped. Vanilla PostgreSQL 18+ baseline with a self-built distributed SQL
+      roadmap (ADR 0001, ADR 0003). '
+    digest: 105da5e20d32fe6781001d89a39a257eabbe9e04d84609f2f1a13bfb902b9f49
+    home: https://github.com/keiailab/postgres-operator
+    icon: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/symbol.png
+    keywords:
+    - postgresql
+    - postgres
+    - postgres-18
+    - operator
+    - kubernetes
+    - keiailab
+    - external-secrets
+    - self-built-distributed-sql
+    - mit
+    kubeVersion: ">=1.26.0-0"
+    maintainers:
+    - email: support@keiailab.com
+      name: keiailab
+      url: https://github.com/keiailab
+    name: postgres-operator
+    sources:
+    - https://github.com/keiailab/postgres-operator
+    type: application
+    urls:
+    - oci://ghcr.io/keiailab/charts/postgres-operator:0.4.0-beta.6
+    version: 0.4.0-beta.6
+  valkey-operator:
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: Refresh operational defaults for Valkey 9.1.0 and document ExternalSecret-based credential sourcing.
+      artifacthub.io/containsSecurityUpdates: 'true'
+      artifacthub.io/crds: |
+        - kind: Valkey
+          version: v1alpha1
+          name: valkeys.cache.keiailab.io
+          displayName: Valkey Instance
+          description: Deploys and manages a Valkey standalone or replica instance
+        - kind: ValkeyCluster
+          version: v1alpha1
+          name: valkeyclusters.cache.keiailab.io
+          displayName: Valkey Cluster
+          description: Deploys and manages a Valkey Cluster (Redis Cluster compatible)
+        - kind: ValkeyBackup
+          version: v1alpha1
+          name: valkeybackups.cache.keiailab.io
+          displayName: Valkey Backup
+          description: Creates point-in-time backups of Valkey instances/clusters
+        - kind: ValkeyBackupTarget
+          version: v1alpha1
+          name: valkeybackuptargets.cache.keiailab.io
+          displayName: Valkey Backup Target
+          description: Defines S3 / PVC backup destinations
+        - kind: ValkeyRestore
+          version: v1alpha1
+          name: valkeyrestores.cache.keiailab.io
+          displayName: Valkey Restore
+          description: Restores a Valkey instance/cluster from a backup
+      artifacthub.io/crdsExamples: |
+        - apiVersion: cache.keiailab.io/v1alpha1
+          kind: Valkey
+          metadata:
+            name: my-valkey
+            namespace: cache
+          spec:
+            mode: Standalone
+            replicas: 1
+            version:
+              version: "9.1.0"
+            storage:
+              storageClassName: standard
+              size: 5Gi
+        - apiVersion: cache.keiailab.io/v1alpha1
+          kind: ValkeyCluster
+          metadata:
+            name: my-valkey-cluster
+            namespace: cache
+          spec:
+            version:
+              version: "9.1.0"
+            shards: 3
+            replicasPerShard: 1
+            storage:
+              storageClassName: standard
+              size: 10Gi
+        - apiVersion: cache.keiailab.io/v1alpha1
+          kind: ValkeyBackup
+          metadata:
+            name: my-valkey-backup
+            namespace: cache
+          spec:
+            clusterRef:
+              name: my-valkey
+              kind: Valkey
+            type: RDB
+            destination:
+              type: TargetRef
+              targetRef:
+                name: s3-target
+      artifacthub.io/images: |
+        - name: valkey-operator
+          image: ghcr.io/keiailab/valkey-operator:1.3.0
+        - name: valkey
+          image: docker.io/valkey/valkey:9.1.0-alpine3.23
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/keiailab/valkey-operator/blob/main/README.md
+        - name: Source Code
+          url: https://github.com/keiailab/valkey-operator
+        - name: Valkey Project
+          url: https://valkey.io/
+        - name: Design Assets
+          url: https://github.com/KeiaiLab/valkey-operator/blob/main/docs/BRANDING.md
+      artifacthub.io/maturity: stable
+      artifacthub.io/operatorCapabilities: Deep Insights
+      artifacthub.io/prerelease: 'false'
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+        - url: https://artifacthub.io/packages/helm/cert-manager/cert-manager
+      artifacthub.io/screenshots: |
+        - title: Keiailab Valkey Operator centered service symbol
+          url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
+    apiVersion: v2
+    appVersion: 1.3.0
+    created: '2026-06-15T11:56:28.613865+09:00'
+    dependencies:
+    - name: keiailab-commons
+      repository: oci://ghcr.io/keiailab/charts
+      version: 0.8.0
+    description: A Kubernetes Operator for managing Valkey instances and Clusters
+      (Redis OSS fork, BSD-licensed)
+    digest: 26ba6376485fcbe77cc6ffef4e215f513fe5d07811ed47ca97e5f6f4ae49c922
+    home: https://github.com/keiailab/valkey-operator
+    icon: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
+    keywords:
+    - valkey
+    - redis
+    - cache
+    - key-value
+    - in-memory
+    - operator
+    - cluster
+    - kubernetes
+    kubeVersion: ">=1.26.0-0"
+    maintainers:
+    - email: support@keiailab.com
+      name: Keiailab
+      url: https://keiailab.com
+    name: valkey-operator
+    sources:
+    - https://github.com/keiailab/valkey-operator
+    type: application
+    urls:
+    - oci://ghcr.io/keiailab/charts/valkey-operator:1.3.2
+    version: 1.3.2
+generated: '2026-06-15T02:56:28Z'

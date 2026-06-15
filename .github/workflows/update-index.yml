@@ -1,0 +1,44 @@
+name: Update Helm index
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+  push:
+    paths:
+      - "catalog.yaml"
+      - "hack/update-index.sh"
+      - "hack/verify-index.sh"
+      - ".github/workflows/update-index.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-helm-index
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: azure/setup-helm@v5
+        with:
+          version: latest
+      - name: Update index.yaml
+        run: bash hack/update-index.sh
+      - name: Verify index.yaml
+        run: bash hack/verify-index.sh
+      - name: Commit index.yaml
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- index.yaml; then
+            echo "index.yaml unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.yaml
+          git commit -m "chore: update Helm chart index"
+          git push

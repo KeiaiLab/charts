@@ -1,0 +1,17 @@
+name: Artifact Hub smoke
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "47 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify Artifact Hub search grouping
+        run: bash hack/artifacthub_smoke.sh
