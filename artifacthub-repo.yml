@@ -1,0 +1,10 @@
+# Artifact Hub repository metadata for the central KeiaiLab Helm catalog.
+# The repositoryID was issued by Artifact Hub for:
+#   name: keiailab
+#   url:  https://keiailab.github.io/charts
+
+repositoryID: 1beec8eb-2e43-48fa-8274-9a5d24b0aa14
+
+owners:
+  - name: keiailab
+    email: support@keiailab.com
