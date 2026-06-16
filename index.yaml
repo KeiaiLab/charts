@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-06-16T05:36:26.460998666Z'
+    created: '2026-06-16T11:37:08.21620974Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -128,7 +128,7 @@ entries:
                   name: s3-credentials
       artifacthub.io/images: |
         - name: mongodb-operator
-          image: ghcr.io/keiailab/mongodb-operator:v1.13.1
+          image: ghcr.io/keiailab/mongodb-operator:v1.12.2
         - name: mongodb
           image: mongo:8.3.1
         - name: mongodb-exporter
@@ -136,13 +136,13 @@ entries:
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Documentation
-          url: https://github.com/keiailab/mongodb-operator/blob/stable/README.md
+          url: https://github.com/keiailab/mongodb-operator/blob/main/README.md
         - name: Source Code
           url: https://github.com/keiailab/mongodb-operator
         - name: MongoDB Documentation
           url: https://www.mongodb.com/docs/
         - name: Design Assets
-          url: https://github.com/KeiaiLab/mongodb-operator/blob/stable/docs/BRANDING.md
+          url: https://github.com/KeiaiLab/mongodb-operator/blob/main/docs/BRANDING.md
       artifacthub.io/maturity: stable
       artifacthub.io/operator: 'true'
       artifacthub.io/operatorCapabilities: Auto Pilot
@@ -152,15 +152,15 @@ entries:
         - url: https://artifacthub.io/packages/helm/cert-manager/cert-manager
       artifacthub.io/screenshots: |
         - title: Keiailab MongoDB Operator centered service symbol
-          url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/stable/docs/branding/symbol.png
+          url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
         - title: Keiailab MongoDB Operator social cover
-          url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/stable/docs/branding/cover.png
+          url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/cover.png
       artifacthub.io/signKey: |
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
-        url: https://raw.githubusercontent.com/keiailab/mongodb-operator/stable/charts/keiailab-helm-signing-public.asc
+        url: https://raw.githubusercontent.com/keiailab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.13.1
-    created: '2026-06-16T05:36:26.47743528Z'
+    created: '2026-06-16T11:37:08.236553629Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -169,7 +169,7 @@ entries:
       Clusters (v1.0.0 GA Release)
     digest: 307272e449567ca3dc0cfac44d2b30822a27ee741e123d5083eabdbe6cf78a25
     home: https://github.com/keiailab/mongodb-operator
-    icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/stable/docs/branding/symbol.png
+    icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
     - mongodb
     - database
@@ -385,29 +385,29 @@ entries:
               - name: pgcrypto
       artifacthub.io/images: |
         - name: manager
-          image: ghcr.io/keiailab/postgres-operator:0.4.0-beta.8
+          image: ghcr.io/keiailab/postgres-operator:0.4.0-beta.1
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Documentation
-          url: https://github.com/keiailab/postgres-operator/blob/stable/README.md
+          url: https://github.com/keiailab/postgres-operator/blob/main/README.md
         - name: Source Code
           url: https://github.com/keiailab/postgres-operator
         - name: Release Process
-          url: https://github.com/keiailab/postgres-operator/blob/stable/docs/releases/release-process.md
+          url: https://github.com/keiailab/postgres-operator/blob/main/docs/releases/release-process.md
         - name: Design Assets
-          url: https://github.com/KeiaiLab/postgres-operator/blob/stable/docs/BRANDING.md
+          url: https://github.com/KeiaiLab/postgres-operator/blob/main/docs/BRANDING.md
       artifacthub.io/maturity: beta
       artifacthub.io/operator: 'true'
       artifacthub.io/operatorCapabilities: Deep Insights
       artifacthub.io/prerelease: 'true'
       artifacthub.io/screenshots: |
         - title: Keiailab Postgres Operator centered service symbol
-          url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/stable/docs/branding/symbol.png
+          url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/symbol.png
         - title: Keiailab Postgres Operator light wordmark
-          url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/stable/docs/branding/light.png
+          url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-06-16T05:36:26.484535632Z'
+    created: '2026-06-16T11:37:08.246391118Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -418,7 +418,7 @@ entries:
       roadmap (ADR 0001, ADR 0003). '
     digest: fd58bbda1d774e482f116c621793466d1ccaf32942492e755008c4e61ec74a14
     home: https://github.com/keiailab/postgres-operator
-    icon: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/stable/docs/branding/symbol.png
+    icon: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/symbol.png
     keywords:
     - postgresql
     - postgres
@@ -541,7 +541,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.3.0
-    created: '2026-06-16T05:36:26.489467997Z'
+    created: '2026-06-16T11:37:08.251154831Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -572,4 +572,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.3.2
     version: 1.3.2
-generated: '2026-06-16T05:36:26Z'
+generated: '2026-06-16T11:37:08Z'
