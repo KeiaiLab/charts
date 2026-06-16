@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-06-16T04:54:33.37184114Z'
+    created: '2026-06-16T14:09:33.250526+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -160,7 +160,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.13.1
-    created: '2026-06-16T04:54:33.387301248Z'
+    created: '2026-06-16T14:09:33.265368+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -406,8 +406,8 @@ entries:
         - title: Keiailab Postgres Operator light wordmark
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
-    appVersion: 0.4.0-beta.7
-    created: '2026-06-16T04:54:33.395289992Z'
+    appVersion: 0.4.0-beta.8
+    created: '2026-06-16T14:09:33.271764+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -416,7 +416,7 @@ entries:
       quality is the target, but external operators/backends are not forked, embedded,
       or wrapped. Vanilla PostgreSQL 18+ baseline with a self-built distributed SQL
       roadmap (ADR 0001, ADR 0003). '
-    digest: d6c5d631781952879a0b57a715e94c31a6af44e9ce6cfe262911d18a2598e861
+    digest: fd58bbda1d774e482f116c621793466d1ccaf32942492e755008c4e61ec74a14
     home: https://github.com/keiailab/postgres-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/symbol.png
     keywords:
@@ -439,8 +439,8 @@ entries:
     - https://github.com/keiailab/postgres-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/postgres-operator:0.4.0-beta.7
-    version: 0.4.0-beta.7
+    - oci://ghcr.io/keiailab/charts/postgres-operator:0.4.0-beta.8
+    version: 0.4.0-beta.8
   valkey-operator:
   - annotations:
       artifacthub.io/category: database
@@ -541,7 +541,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.3.0
-    created: '2026-06-16T04:54:33.399593243Z'
+    created: '2026-06-16T14:09:33.274882+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -572,4 +572,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.3.2
     version: 1.3.2
-generated: '2026-06-16T04:54:33Z'
+generated: '2026-06-16T05:09:33Z'
