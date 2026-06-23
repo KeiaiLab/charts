@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-06-23T20:24:47.97323069Z'
+    created: '2026-06-24T07:55:49.50467+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -50,9 +50,9 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: fixed
-          description: "Publish a fresh signed OCI chart version after Artifact Hub cached the 1.12.4 unsigned metadata."
-        - kind: changed
-          description: "Add opt-in ExternalSecret rendering for MongoDB admin/app/S3 credentials while keeping operator appVersion/image at v1.12.2."
+          description: "Zero-downtime upgrade now triggers on adopted clusters (Helm→OLM): Status.Version is seeded on reconcile entry so a later spec.Version bump is detected as an upgrade instead of being permanently skipped (sharded clusters had no Status.Version backfill at all)."
+        - kind: fixed
+          description: "Sync UpgradeStrategy.maxRetries into the packaged Helm CRDs — it was added to the OLM bundle/API in 1.15.1 but the chart CRDs were left stale."
       artifacthub.io/containsSecurityUpdates: 'false'
       artifacthub.io/crds: |
         - kind: MongoDB
@@ -128,7 +128,7 @@ entries:
                   name: s3-credentials
       artifacthub.io/images: |
         - name: mongodb-operator
-          image: ghcr.io/keiailab/mongodb-operator:v1.13.1
+          image: ghcr.io/keiailab/mongodb-operator:v1.15.2
         - name: mongodb
           image: mongo:8.3.1
         - name: mongodb-exporter
@@ -159,15 +159,15 @@ entries:
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
-    appVersion: 1.13.1
-    created: '2026-06-23T20:24:47.989390331Z'
+    appVersion: 1.15.2
+    created: '2026-06-24T07:55:49.518978+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
-    description: A Kubernetes Operator for managing MongoDB ReplicaSets and Sharded
-      Clusters (v1.0.0 GA Release)
-    digest: a856d3d32c7af15cdde4c171f1178418c242dea7eea9f7dd909785c245e03454
+    description: A Kubernetes Operator for MongoDB — ReplicaSets, Sharded Clusters
+      with auto scale-out, S3/PVC Backup, TLS, and LDAP. MIT licensed.
+    digest: ee3386052069bfcad3707634160d840f512d214ea05a10a929dc7def6e95e066
     home: https://github.com/keiailab/mongodb-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
@@ -180,6 +180,13 @@ entries:
     - backup
     - kubernetes
     - external-secrets
+    - mongodb-operator
+    - kubernetes-operator
+    - mongodb-backup
+    - pitr
+    - ldap
+    - mongos
+    - helm
     kubeVersion: ">=1.26.0-0"
     maintainers:
     - email: support@keiailab.com
@@ -190,8 +197,8 @@ entries:
     - https://github.com/keiailab/mongodb-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.13.2
-    version: 1.13.2
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.15.2
+    version: 1.15.2
   postgres-operator:
   - annotations:
       artifacthub.io/alternativeName: keiailab-postgres-operator
@@ -407,7 +414,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-06-23T20:24:47.996554754Z'
+    created: '2026-06-24T07:55:49.525627+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -541,7 +548,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.3.0
-    created: '2026-06-23T20:24:48.001532355Z'
+    created: '2026-06-24T07:55:49.528549+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -572,4 +579,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.3.2
     version: 1.3.2
-generated: '2026-06-23T20:24:48Z'
+generated: '2026-06-23T22:55:49Z'
