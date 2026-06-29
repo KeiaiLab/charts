@@ -6,4 +6,4 @@ charts:
   - name: mongodb-operator
     version: 1.16.5
   - name: valkey-operator
-    version: 1.4.0
+    version: 1.5.1
