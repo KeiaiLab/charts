@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-06-29T20:17:21.041934814Z'
+    created: '2026-06-29T23:07:49.893450024Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -158,7 +158,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.5
-    created: '2026-06-29T20:17:21.059517793Z'
+    created: '2026-06-29T23:07:49.913396331Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -412,7 +412,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-06-29T20:17:21.066698732Z'
+    created: '2026-06-29T23:07:49.921622635Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -450,8 +450,8 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
-        - kind: changed
-          description: Bump chart to appVersion 1.5.0 (operator image 1.5.0) — chart had lagged at 1.3.0 while ghcr image advanced to 1.5.0.
+        - kind: fixed
+          description: "TLS cluster: announce cluster-bus port as tls-port+10000 (16380) instead of hardcoded 16379 — fixes inter-node gossip failure (cluster_state:fail / slots_ok:0) on tls-cluster deployments."
       artifacthub.io/containsSecurityUpdates: 'true'
       artifacthub.io/crds: |
         - kind: Valkey
@@ -522,7 +522,7 @@ entries:
                 name: s3-target
       artifacthub.io/images: |
         - name: valkey-operator
-          image: ghcr.io/keiailab/valkey-operator:1.5.0
+          image: ghcr.io/keiailab/valkey-operator:1.5.1
         - name: valkey
           image: docker.io/valkey/valkey:9.1.0-alpine3.23
       artifacthub.io/license: MIT
@@ -545,15 +545,15 @@ entries:
         - title: Keiailab Valkey Operator centered service symbol
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
-    appVersion: 1.5.0
-    created: '2026-06-29T20:17:21.07171952Z'
+    appVersion: 1.5.1
+    created: '2026-06-29T23:07:49.927214457Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for managing Valkey instances and Clusters
       (Redis OSS fork, BSD-licensed)
-    digest: 16ec3f58314e1c8c25f148123421a27b8ba6286f6b7c5c7be0a1d4bc7eaa4bd0
+    digest: 9018ac0ee0cfdeaa678a5854c94e174c1c6aea41bac020ad19eaba1124b943d3
     home: https://github.com/keiailab/valkey-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     keywords:
@@ -575,6 +575,6 @@ entries:
     - https://github.com/keiailab/valkey-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/valkey-operator:1.4.0
-    version: 1.4.0
-generated: '2026-06-29T20:17:21Z'
+    - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.1
+    version: 1.5.1
+generated: '2026-06-29T23:07:50Z'
