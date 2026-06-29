@@ -4,6 +4,6 @@ charts:
   - name: postgres-operator
     version: 0.4.0-beta.9
   - name: mongodb-operator
-    version: 1.15.2
+    version: 1.16.5
   - name: valkey-operator
     version: 1.4.0

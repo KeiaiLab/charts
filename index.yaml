@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-06-28T19:48:02.130695849Z'
+    created: '2026-06-29T09:46:20.070936+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -49,11 +49,9 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
-        - kind: fixed
-          description: "Zero-downtime upgrade now triggers on adopted clusters (Helm→OLM): Status.Version is seeded on reconcile entry so a later spec.Version bump is detected as an upgrade instead of being permanently skipped (sharded clusters had no Status.Version backfill at all)."
-        - kind: fixed
-          description: "Sync UpgradeStrategy.maxRetries into the packaged Helm CRDs — it was added to the OLM bundle/API in 1.15.1 but the chart CRDs were left stale."
-      artifacthub.io/containsSecurityUpdates: 'false'
+        - kind: security
+          description: "MongoDBSearch now drops the auto-created searchCoordinator (search-sync) user from the source on CR deletion via a finalizer. Previously the privileged user was never garbage-collected (no finalizer/dropUser), so deleting a MongoDBSearch left an orphaned searchCoordinator account on the source — a privilege-leak (on sharded clusters it lingered on the config server and every shard). The cleanup drops the user on RS (pod-0) and Sharded (mongos + each shard); it is leak-free (only a deleted source is best-effort skipped — a transient-unavailable source retries) and targets only operator-managed users (identified by the managed-by sync secret, not the current spec value)."
+      artifacthub.io/containsSecurityUpdates: 'true'
       artifacthub.io/crds: |
         - kind: MongoDB
           version: v1alpha1
@@ -128,7 +126,7 @@ entries:
                   name: s3-credentials
       artifacthub.io/images: |
         - name: mongodb-operator
-          image: ghcr.io/keiailab/mongodb-operator:v1.15.2
+          image: ghcr.io/keiailab/mongodb-operator:v1.16.4
         - name: mongodb
           image: mongo:8.3.1
         - name: mongodb-exporter
@@ -159,15 +157,15 @@ entries:
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
-    appVersion: 1.15.2
-    created: '2026-06-28T19:48:02.149641191Z'
+    appVersion: 1.16.5
+    created: '2026-06-29T09:46:20.086222+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for MongoDB — ReplicaSets, Sharded Clusters
       with auto scale-out, S3/PVC Backup, TLS, and LDAP. MIT licensed.
-    digest: ee3386052069bfcad3707634160d840f512d214ea05a10a929dc7def6e95e066
+    digest: ef915d43200d602bf1352225160990c0dd075cf87374104174c64a63d8798466
     home: https://github.com/keiailab/mongodb-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
@@ -197,8 +195,8 @@ entries:
     - https://github.com/keiailab/mongodb-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.15.2
-    version: 1.15.2
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.5
+    version: 1.16.5
   postgres-operator:
   - annotations:
       artifacthub.io/alternativeName: keiailab-postgres-operator
@@ -414,7 +412,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-06-28T19:48:02.157373815Z'
+    created: '2026-06-29T09:46:20.092399+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -548,7 +546,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.0
-    created: '2026-06-28T19:48:02.162289098Z'
+    created: '2026-06-29T09:46:20.095711+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -579,4 +577,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.4.0
     version: 1.4.0
-generated: '2026-06-28T19:48:02Z'
+generated: '2026-06-29T00:46:20Z'
