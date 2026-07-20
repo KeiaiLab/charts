@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-07-20T04:31:47.59306703Z'
+    created: '2026-07-20T13:36:23.932372+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -157,15 +157,15 @@ entries:
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
-    appVersion: 1.16.5
-    created: '2026-07-20T04:31:47.612341106Z'
+    appVersion: 1.16.6
+    created: '2026-07-20T13:36:23.967037+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for MongoDB — ReplicaSets, Sharded Clusters
       with auto scale-out, S3/PVC Backup, TLS, and LDAP. MIT licensed.
-    digest: ef915d43200d602bf1352225160990c0dd075cf87374104174c64a63d8798466
+    digest: 69c8f9d888775f3c350d92a265b710940c22e24080a4ce4383f15f3b20da8747
     home: https://github.com/keiailab/mongodb-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
@@ -195,8 +195,8 @@ entries:
     - https://github.com/keiailab/mongodb-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.5
-    version: 1.16.5
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.6
+    version: 1.16.6
   nodevitals:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -218,7 +218,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.1.0
-    created: '2026-07-20T04:31:47.612924359Z'
+    created: '2026-07-20T13:36:23.968262+09:00'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: a457e82f7e016ebff437087dd0401f7de4915b3514383b0cc0b2f3a7aefd72e0
     home: https://github.com/keiailab/nodevitals
@@ -461,7 +461,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-07-20T04:31:47.620308157Z'
+    created: '2026-07-20T13:36:23.976528+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -595,7 +595,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.1
-    created: '2026-07-20T04:31:47.62525101Z'
+    created: '2026-07-20T13:36:23.979832+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -626,4 +626,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.1
     version: 1.5.1
-generated: '2026-07-20T04:31:47Z'
+generated: '2026-07-20T04:36:24Z'
