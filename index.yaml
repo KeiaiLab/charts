@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-07-19T19:34:25.297238989Z'
+    created: '2026-07-20T03:43:08.550478417Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -158,7 +158,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.5
-    created: '2026-07-19T19:34:25.311069746Z'
+    created: '2026-07-20T03:43:08.568205661Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -197,6 +197,17 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.5
     version: 1.16.5
+  nodevitals:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: '2026-07-20T03:43:08.568683286Z'
+    description: Unified hardware telemetry agent for Kubernetes nodes
+    digest: d3916abdbd3d150308c2550466d486faf60fe107e96688f54b968901c4b6fbe2
+    name: nodevitals
+    type: application
+    urls:
+    - oci://ghcr.io/keiailab/charts/nodevitals:0.1.0
+    version: 0.1.0
   postgres-operator:
   - annotations:
       artifacthub.io/alternativeName: keiailab-postgres-operator
@@ -412,7 +423,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-07-19T19:34:25.3175565Z'
+    created: '2026-07-20T03:43:08.575845012Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -546,7 +557,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.1
-    created: '2026-07-19T19:34:25.320532716Z'
+    created: '2026-07-20T03:43:08.580743619Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -577,4 +588,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.1
     version: 1.5.1
-generated: '2026-07-19T19:34:25Z'
+generated: '2026-07-20T03:43:08Z'
