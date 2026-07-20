@@ -7,3 +7,5 @@ charts:
     version: 1.16.5
   - name: valkey-operator
     version: 1.5.1
+  - name: nodevitals
+    version: 0.1.0
