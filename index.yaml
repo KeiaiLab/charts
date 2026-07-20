@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-07-20T04:07:06.880120161Z'
+    created: '2026-07-20T04:31:47.59306703Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -158,7 +158,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.5
-    created: '2026-07-20T04:07:06.899294721Z'
+    created: '2026-07-20T04:31:47.612341106Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -198,16 +198,54 @@ entries:
     - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.5
     version: 1.16.5
   nodevitals:
-  - apiVersion: v2
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/images: |
+        - name: nodevitals
+          image: ghcr.io/keiailab/nodevitals:0.1.0
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/keiailab/nodevitals/blob/main/README.md
+        - name: Source Code
+          url: https://github.com/keiailab/nodevitals
+        - name: Design Assets
+          url: https://github.com/KeiaiLab/nodevitals/blob/main/docs/BRANDING.md
+      artifacthub.io/maturity: alpha
+      artifacthub.io/prerelease: 'true'
+      artifacthub.io/screenshots: |
+        - title: Keiailab nodevitals centered service symbol
+          url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
+    apiVersion: v2
     appVersion: 0.1.0
-    created: '2026-07-20T04:07:06.899795077Z'
+    created: '2026-07-20T04:31:47.612924359Z'
     description: Unified hardware telemetry agent for Kubernetes nodes
-    digest: d3916abdbd3d150308c2550466d486faf60fe107e96688f54b968901c4b6fbe2
+    digest: a457e82f7e016ebff437087dd0401f7de4915b3514383b0cc0b2f3a7aefd72e0
+    home: https://github.com/keiailab/nodevitals
+    icon: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
+    keywords:
+    - nodevitals
+    - telemetry
+    - observability
+    - hardware-monitoring
+    - gpu-monitoring
+    - smart
+    - prometheus
+    - webhook
+    - daemonset
+    - kubernetes
+    kubeVersion: ">=1.26.0-0"
+    maintainers:
+    - email: support@keiailab.com
+      name: keiailab
+      url: https://keiailab.com
     name: nodevitals
+    sources:
+    - https://github.com/keiailab/nodevitals
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/nodevitals:0.1.0
-    version: 0.1.0
+    - oci://ghcr.io/keiailab/charts/nodevitals:0.1.1
+    version: 0.1.1
   postgres-operator:
   - annotations:
       artifacthub.io/alternativeName: keiailab-postgres-operator
@@ -423,7 +461,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/postgres-operator/main/docs/branding/light.png
     apiVersion: v2
     appVersion: 0.4.0-beta.8
-    created: '2026-07-20T04:07:06.909426341Z'
+    created: '2026-07-20T04:31:47.620308157Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -557,7 +595,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.1
-    created: '2026-07-20T04:07:06.914824201Z'
+    created: '2026-07-20T04:31:47.62525101Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -588,4 +626,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.1
     version: 1.5.1
-generated: '2026-07-20T04:07:07Z'
+generated: '2026-07-20T04:31:47Z'
