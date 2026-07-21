@@ -34,3 +34,18 @@ urls:
 
 이 구조는 Bitnami chart catalog와 같은 방향입니다. Artifact Hub에는 이 repository의
 GitHub Pages URL을 등록하고, chart payload는 GHCR OCI에서 가져옵니다.
+
+## 발행 일관성 (drift 방지)
+
+OSS chart 는 릴리스마다 4채널을 함께 맞춰야 한다 — **GitHub 태그 / 컨테이너 이미지 /
+ghcr OCI chart / 이 카탈로그**. 코드·이미지만 앞서가고 공개 chart 가 조용히 뒤처지는
+사고를 막기 위해 두 층을 둔다.
+
+| 층 | 도구 | 역할 |
+|---|---|---|
+| 예방 | 각 OSS repo `make release VERSION=x.y.z` | 게이트→태그→이미지→chart→카탈로그를 한 번에 (누락 구조적 불가) |
+| 검출 | `python3 hack/verify_consistency.py` | 전 chart 4채널 대조, drift 시 exit 1 |
+
+검출은 클러스터 CronJob(`platform-system-charts-consistency`, daily)이 자동 실행한다 —
+사람이 잊어도 하루 안에 드러난다. 표준 라이브러리만 쓰고 원격 HTTP 만 읽으므로 로컬과
+CronJob 에서 동일하게 동작한다.
