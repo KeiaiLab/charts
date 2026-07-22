@@ -35,6 +35,16 @@ urls:
 이 구조는 Bitnami chart catalog와 같은 방향입니다. Artifact Hub에는 이 repository의
 GitHub Pages URL을 등록하고, chart payload는 GHCR OCI에서 가져옵니다.
 
+repository 등록은 **최초 1회**로 끝난다 (현재 `repositoryID`
+`1beec8eb-2e43-48fa-8274-9a5d24b0aa14`, `artifacthub-repo.yml`). 이후 Artifact Hub
+는 등록된 GitHub Pages `index.yaml` 을 자체 30분 주기로 **크롤링**해 새 버전을
+픽업하므로, catalog 갱신(→ `update-index.yml` → `index.yaml`) 외에 별도 등록
+호출이 필요 없다. 과거의 `artifacthub-register` 워크플로우는 `POST
+/repositories/org/keiailab` 로 repository 를 *생성* 하려 했는데, 이미 등록된
+이름과 충돌해 매 실행 500 을 냈다(최초 등록 후 존재 이유 소멸) — 그래서 제거했다.
+AH API 키(`AH_API_KEY_*`)는 향후 신규 catalog repo 등록 등에 대비해 ksm
+`secret/infra/integrations/artifacthub-api` 에 보관한다.
+
 ## 발행 일관성 (drift 방지)
 
 OSS chart 는 릴리스마다 4채널을 함께 맞춰야 한다 — **GitHub 태그 / 컨테이너 이미지 /
