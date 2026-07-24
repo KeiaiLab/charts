@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-07-24T10:29:10.625483063Z'
+    created: '2026-07-24T10:41:48.080462889Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -126,7 +126,7 @@ entries:
                   name: s3-credentials
       artifacthub.io/images: |
         - name: mongodb-operator
-          image: ghcr.io/keiailab/mongodb-operator:v1.16.4
+          image: harbor.keiailab.dev/keiailab/platform/mongodb-operator:v1.16.4
         - name: mongodb
           image: mongo:8.3.1
         - name: mongodb-exporter
@@ -158,14 +158,14 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.6
-    created: '2026-07-24T10:29:10.643166317Z'
+    created: '2026-07-24T10:41:48.098254252Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for MongoDB — ReplicaSets, Sharded Clusters
       with auto scale-out, S3/PVC Backup, TLS, and LDAP. MIT licensed.
-    digest: 69c8f9d888775f3c350d92a265b710940c22e24080a4ce4383f15f3b20da8747
+    digest: 8dea8fadee179b2ba7fc50a16da0df9cb1a80f650366999c13e721e107a2021a
     home: https://github.com/keiailab/mongodb-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
@@ -195,8 +195,8 @@ entries:
     - https://github.com/keiailab/mongodb-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.6
-    version: 1.16.6
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.7
+    version: 1.16.7
   nodevitals:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -218,7 +218,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.8.2
-    created: '2026-07-24T10:29:10.644106709Z'
+    created: '2026-07-24T10:41:48.099241116Z'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: d9e7e5894f16af44650a0fef941fe52dd87a335e0537433aa05ae81e65af865e
     home: https://github.com/keiailab/nodevitals
@@ -256,7 +256,7 @@ entries:
       artifacthub.io/operator: 'true'
     apiVersion: v2
     appVersion: v0.7.0
-    created: '2026-07-24T10:29:10.644765222Z'
+    created: '2026-07-24T10:41:48.099943729Z'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster provisioning, distributed (Raft) clusters, scale-out. MIT licensed.
     digest: 4481895cfb7e79db0a459fc9d34da97d3eab0e4a654fa9edbcb664f19f5033e0
@@ -377,7 +377,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.1
-    created: '2026-07-24T10:29:10.648452759Z'
+    created: '2026-07-24T10:41:48.10385125Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -408,4 +408,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.1
     version: 1.5.1
-generated: '2026-07-24T10:29:10Z'
+generated: '2026-07-24T10:41:48Z'
