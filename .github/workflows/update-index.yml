@@ -9,6 +9,7 @@ on:
       - "catalog.yaml"
       - "hack/update-index.sh"
       - "hack/verify-index.sh"
+      - "hack/verify-images.py"
       - ".github/workflows/update-index.yml"
 
 permissions:
