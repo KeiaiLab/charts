@@ -84,3 +84,19 @@ end
 	helm show chart "keiailab/${chart_name}" --version "$chart_version" >/dev/null
 	echo "helm show chart OK: keiailab/${chart_name}:${chart_version}"
 done
+
+# artifacthub.io/images 검증 — 카탈로그가 ArtifactHub 로 나가는 유일한 길목이라
+# 차트 repo 마다 게이트를 복제하지 않고 여기서 한 번에 막는다 (hack/verify-images.py 참조).
+ruby -ryaml -e '
+doc = YAML.safe_load(File.read(ARGV.fetch(0)))
+doc.fetch("charts").each do |chart|
+  puts [chart.fetch("name"), chart.fetch("version")].join("\t")
+end
+' "$catalog_file" | while IFS=$'\t' read -r chart_name chart_version; do
+	chart_yaml="$(HELM_CONFIG_HOME="$tmpdir/config" HELM_CACHE_HOME="$tmpdir/cache" \
+		HELM_DATA_HOME="$tmpdir/data" \
+		helm show chart "keiailab/${chart_name}" --version "$chart_version")"
+	printf '%s\t%s\t%s\0' "$chart_name" "$chart_version" "$chart_yaml"
+done >"$tmpdir/charts.records"
+
+python3 "${repo_root}/hack/verify-images.py" <"$tmpdir/charts.records"
