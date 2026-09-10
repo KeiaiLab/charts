@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.8.0
-    created: '2026-09-10T04:53:50.284434716Z'
+    created: '2026-09-10T16:19:40.616083+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -158,7 +158,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.6
-    created: '2026-09-10T04:53:50.302390571Z'
+    created: '2026-09-10T16:19:40.629132+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -218,7 +218,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.8.5
-    created: '2026-09-10T04:53:50.30331121Z'
+    created: '2026-09-10T16:19:40.629828+09:00'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: b5cb5bb960e5021a670283e1edf2ec7c3bb2f3ea1dcf3553fa769b27c00f46b4
     home: https://github.com/keiailab/nodevitals
@@ -250,20 +250,28 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
-        - kind: fixed
-          description: "Dead replicas no longer stall the rebalancer: replication-factor repair now runs while a replica is Dead, and the dead copy is reclaimed once healthy replicas meet the factor."
-        - kind: fixed
-          description: "Replication no longer targets a peer that already holds a dead copy of the same shard."
+        - kind: added
+          description: "QdrantBackup: scheduled snapshot backups fanned out across every peer, with cron scheduling and retention."
+        - kind: added
+          description: "QdrantRestore: restore a collection from a backup generation, one recovery per peer."
+        - kind: added
+          description: "spec.snapshots points snapshot storage at S3-compatible object storage; Qdrant writes there itself."
+        - kind: added
+          description: "Raft-aware rolling upgrades: the rollout advances only once the restarted peer rejoins consensus and every shard is Active."
+        - kind: added
+          description: "Prometheus metrics and alert rules for backups, dead replicas, rebalance convergence and gated rollouts."
+        - kind: added
+          description: "TLS: config.tls.secretName supplies the certificates the tlsEnabled switch always required; the operator connects over HTTPS verifying against the same CA."
       artifacthub.io/license: MIT
       artifacthub.io/operator: 'true'
     apiVersion: v2
-    appVersion: v0.9.0
-    created: '2026-09-10T04:53:50.303892511Z'
+    appVersion: v0.10.0
+    created: '2026-09-10T16:19:40.631005+09:00'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster/QdrantCollection management, distributed (Raft) clusters, automatic
       shard rebalancing, replication-factor repair, and drain-based scale-in. MIT
       licensed.
-    digest: b8b802e5f0fae2e8f10674e99b851dbef63bd94c6674aa1277267ac32767ba46
+    digest: ed8eb6733471d3edb37d703ddd899ed1ec7b4d40d50eadeed4d5380ec14077eb
     home: https://github.com/keiailab/qdrant-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/qdrant-operator/main/docs/branding/symbol.png
     keywords:
@@ -279,8 +287,8 @@ entries:
     - https://github.com/keiailab/qdrant-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/qdrant-operator:0.9.0
-    version: 0.9.0
+    - oci://ghcr.io/keiailab/charts/qdrant-operator:0.10.0
+    version: 0.10.0
   valkey-operator:
   - annotations:
       artifacthub.io/category: database
@@ -381,7 +389,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.2
-    created: '2026-09-10T04:53:50.307434767Z'
+    created: '2026-09-10T16:19:40.633691+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -412,4 +420,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.2
     version: 1.5.2
-generated: '2026-09-10T04:53:50Z'
+generated: '2026-09-10T07:19:40Z'
