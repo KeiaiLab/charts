@@ -19,12 +19,12 @@ entries:
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
-    appVersion: 0.8.0
-    created: '2026-09-14T21:52:10.527942399Z'
+    appVersion: 0.13.0
+    created: '2026-09-15T01:33:42.014790844Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
-    digest: 611550875f3a096d3414dc864077bf754e9e029c396784b425036ede9bf887f8
+    digest: 4cc7f0b3d770486121784567e8f2babac391b4d8536d8f4aad1e1cf72857a08e
     home: https://github.com/keiailab/keiailab-commons
     icon: https://raw.githubusercontent.com/KeiaiLab/keiailab-commons/main/docs/branding/symbol.png
     keywords:
@@ -43,14 +43,16 @@ entries:
     - https://github.com/keiailab/keiailab-commons/tree/main/charts/keiailab-commons
     type: library
     urls:
-    - oci://ghcr.io/keiailab/charts/keiailab-commons:0.8.1
-    version: 0.8.1
+    - oci://ghcr.io/keiailab/charts/keiailab-commons:0.13.0
+    version: 0.13.0
   mongodb-operator:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: fixed
-          description: "artifacthub.io/images now points the operator image at the public registry (ghcr.io/keiailab/mongodb-operator:v1.16.6). The annotation was left at the internal-only harbor.keiailab.dev registry pinned to a stale v1.16.4 tag, so Artifact Hub's security scanner could not resolve the host and every scan of the package errored out — the chart itself has defaulted to ghcr.io since 1.16.7. Chart-only metadata release, no operator changes."
+          description: "mongod exec liveness/readiness probes no longer kill a healthy database. The probe spawns mongosh, a Node.js runtime, so it costs hundreds of milliseconds before it reaches mongod; when a node's container-exec path stalls only the probe slows down, but the 5s timeout read that stall as a dead database. Measured on a live cluster: exit 137 with reason=Error rather than OOMKilled, 148 restarts on a single pod, 99.6% of 10,007 cluster-wide exec timeouts on one node, and 1% CPU throttling on the container. Liveness is now 30s/15s/4 (was 10s/5s/6) and readiness 15s/10s (was 10s/5s), shared by ReplicaSet, config server and shard through one named-constant set. Liveness keeps exec because hang detection needs a real ping - TCP is accepted by a wedged mongod too. See ADR-0042."
+        - kind: fixed
+          description: "The mongot search sidecar had no resource requests or limits at all. mongot is a JVM started without -Xmx, so it reads its heap ceiling from the container cgroup; with no limit it sizes against whole-node RAM. Fifteen sidecars had drifted between 571Mi and 3956Mi with no bound, and the single unbounded container dragged the whole pod down to Burstable QoS, making mongod an eviction candidate alongside it. Defaults are now 50m/512Mi requests and 1/6Gi limits."
       artifacthub.io/containsSecurityUpdates: 'false'
       artifacthub.io/crds: |
         - kind: MongoDB
@@ -126,7 +128,7 @@ entries:
                   name: s3-credentials
       artifacthub.io/images: |
         - name: mongodb-operator
-          image: ghcr.io/keiailab/mongodb-operator:v1.16.6
+          image: ghcr.io/keiailab/mongodb-operator:v1.16.9
         - name: mongodb
           image: mongo:8.3.1
         - name: mongodb-exporter
@@ -157,15 +159,15 @@ entries:
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
-    appVersion: 1.16.6
-    created: '2026-09-14T21:52:10.546881634Z'
+    appVersion: 1.16.9
+    created: '2026-09-15T01:33:42.033315117Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for MongoDB — ReplicaSets, Sharded Clusters
       with auto scale-out, S3/PVC Backup, TLS, and LDAP. MIT licensed.
-    digest: 10d7107694d39e39c813ee7aaf5935435eebf50530de0b398e5d0e903765d461
+    digest: 2c678805bc126868716facaf5808da224cf5bc89556c33868b0cbd1a25cc8b4b
     home: https://github.com/keiailab/mongodb-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
@@ -195,8 +197,8 @@ entries:
     - https://github.com/keiailab/mongodb-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.8
-    version: 1.16.8
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.9
+    version: 1.16.9
   nodevitals:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -218,7 +220,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.8.5
-    created: '2026-09-14T21:52:10.547982559Z'
+    created: '2026-09-15T01:33:42.034356376Z'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: b5cb5bb960e5021a670283e1edf2ec7c3bb2f3ea1dcf3553fa769b27c00f46b4
     home: https://github.com/keiailab/nodevitals
@@ -256,7 +258,7 @@ entries:
       artifacthub.io/operator: 'true'
     apiVersion: v2
     appVersion: v0.10.1
-    created: '2026-09-14T21:52:10.548849425Z'
+    created: '2026-09-15T01:33:42.035161012Z'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster/QdrantCollection management, distributed (Raft) clusters, automatic
       shard rebalancing, replication-factor repair, and drain-based scale-in. MIT
@@ -379,7 +381,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.2
-    created: '2026-09-14T21:52:10.553032615Z'
+    created: '2026-09-15T01:33:42.039144755Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -410,4 +412,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.2
     version: 1.5.2
-generated: '2026-09-14T21:52:10Z'
+generated: '2026-09-15T01:33:42Z'
