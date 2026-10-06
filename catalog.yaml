@@ -4,7 +4,7 @@ charts:
   - name: mongodb-operator
     version: 1.16.10
   - name: valkey-operator
-    version: 1.5.2
+    version: 1.5.4
   - name: nodevitals
     version: 0.9.4
   - name: qdrant-operator
