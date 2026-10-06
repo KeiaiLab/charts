@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.13.0
-    created: '2026-10-06T01:53:00.698165318Z'
+    created: '2026-10-06T11:39:07.790728+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -160,7 +160,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.9
-    created: '2026-10-06T01:53:00.717254382Z'
+    created: '2026-10-06T11:39:07.804114+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -225,7 +225,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.9.4
-    created: '2026-10-06T01:53:00.718436967Z'
+    created: '2026-10-06T11:39:07.805215+09:00'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: 3fc0ae1722bf5aee995c6abe4186e1cc38bd06205d5243bf563822531ba0d473
     home: https://github.com/keiailab/nodevitals
@@ -257,18 +257,22 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
-        - kind: fixed
-          description: "Snapshot creation issued with wait=false is accepted again: Qdrant answers 202 Accepted and the client treated anything but 200 as a failure, so every backup ended in Degraded(SnapshotFailed)."
+        - kind: security
+          description: "grpc v1.83.2 fixes CVE-2026-84304, CVE-2026-84445 (high) and CVE-2026-84303; otel v1.45.0 fixes CVE-2026-81870."
+        - kind: security
+          description: "Operator image base layers are pinned by digest (golang 1.26.8, distroless static nonroot)."
+        - kind: changed
+          description: "QdrantCluster spec.image.tag defaults to Qdrant v1.19.2 (was v1.18.2)."
       artifacthub.io/license: MIT
       artifacthub.io/operator: 'true'
     apiVersion: v2
-    appVersion: v0.10.1
-    created: '2026-10-06T01:53:00.719268575Z'
+    appVersion: v0.10.2
+    created: '2026-10-06T11:39:07.805846+09:00'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster/QdrantCollection management, distributed (Raft) clusters, automatic
       shard rebalancing, replication-factor repair, and drain-based scale-in. MIT
       licensed.
-    digest: adcbc8a8e4b92dccc3396f0e494b0b91c3a3458b635f06c3c44ce1df2c1ca8cd
+    digest: 63194f1f8d31a148e622708dd036ac5e6a495e8c7429bbd942f56c269860cef3
     home: https://github.com/keiailab/qdrant-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/qdrant-operator/main/docs/branding/symbol.png
     keywords:
@@ -284,8 +288,8 @@ entries:
     - https://github.com/keiailab/qdrant-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/qdrant-operator:0.10.1
-    version: 0.10.1
+    - oci://ghcr.io/keiailab/charts/qdrant-operator:0.10.2
+    version: 0.10.2
   valkey-operator:
   - annotations:
       artifacthub.io/category: database
@@ -386,7 +390,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.2
-    created: '2026-10-06T01:53:00.7231106Z'
+    created: '2026-10-06T11:39:07.808704+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -417,4 +421,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.2
     version: 1.5.2
-generated: '2026-10-06T01:53:00Z'
+generated: '2026-10-06T02:39:07Z'

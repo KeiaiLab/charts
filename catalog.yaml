@@ -8,4 +8,4 @@ charts:
   - name: nodevitals
     version: 0.9.4
   - name: qdrant-operator
-    version: 0.10.1
+    version: 0.10.2
