@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.13.0
-    created: '2026-10-06T02:42:00.629755251Z'
+    created: '2026-10-06T02:50:24.063545024Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -49,11 +49,17 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
-        - kind: fixed
-          description: "mongod exec liveness/readiness probes no longer kill a healthy database. The probe spawns mongosh, a Node.js runtime, so it costs hundreds of milliseconds before it reaches mongod; when a node's container-exec path stalls only the probe slows down, but the 5s timeout read that stall as a dead database. Measured on a live cluster: exit 137 with reason=Error rather than OOMKilled, 148 restarts on a single pod, 99.6% of 10,007 cluster-wide exec timeouts on one node, and 1% CPU throttling on the container. Liveness is now 30s/15s/4 (was 10s/5s/6) and readiness 15s/10s (was 10s/5s), shared by ReplicaSet, config server and shard through one named-constant set. Liveness keeps exec because hang detection needs a real ping - TCP is accepted by a wedged mongod too. See ADR-0042."
-        - kind: fixed
-          description: "The mongot search sidecar had no resource requests or limits at all. mongot is a JVM started without -Xmx, so it reads its heap ceiling from the container cgroup; with no limit it sizes against whole-node RAM. Fifteen sidecars had drifted between 571Mi and 3956Mi with no bound, and the single unbounded container dragged the whole pod down to Burstable QoS, making mongod an eviction candidate alongside it. Defaults are now 50m/512Mi requests and 1/6Gi limits."
-      artifacthub.io/containsSecurityUpdates: 'false'
+        - kind: security
+          description: "Go toolchain 1.26.8 (builder golang:1.26.8) and dependency bumps close the open Trivy/govulncheck findings: stdlib 1.26.5 CVEs, golang.org/x/crypto 0.57.0, x/net 0.59.0, x/text 0.42.0, x/mod 0.41.0, grpc 1.83.2 (CVE-2026-84445/84304/84303; 1.84.0 is still affected), OpenTelemetry 1.45.0 (CVE-2026-81870), cel-go 0.30.0."
+        - kind: security
+          description: "Default MongoDB image is now mongo:9.0.2."
+        - kind: security
+          description: "Default exporter image is now percona/mongodb_exporter:0.53.0."
+        - kind: security
+          description: "Workflow hardening: every GitHub Action pinned by commit SHA, govulncheck and the catalog opm base image pinned, release/helm-publish/security-scan tokens read-only at the top level with write scopes per job, Dependabot version updates enabled."
+        - kind: added
+          description: "MongoDB 9.0 support. The upgrade webhook admits 8.3 -> 9.0 (9.0 starts with FCV 8.3); FCV 9.0 is committed after the upgrade validates. Other cross-major paths stay rejected."
+      artifacthub.io/containsSecurityUpdates: 'true'
       artifacthub.io/crds: |
         - kind: MongoDB
           version: v1alpha1
@@ -79,7 +85,7 @@ entries:
           spec:
             members: 3
             version:
-              version: "8.3.1"
+              version: "9.0.2"
             storage:
               storageClassName: standard
               size: 10Gi
@@ -96,7 +102,7 @@ entries:
             namespace: database
           spec:
             version:
-              version: "8.3.1"
+              version: "9.0.2"
             configServer:
               members: 3
               storage:
@@ -128,11 +134,13 @@ entries:
                   name: s3-credentials
       artifacthub.io/images: |
         - name: mongodb-operator
-          image: ghcr.io/keiailab/mongodb-operator:v1.16.9
+          image: ghcr.io/keiailab/mongodb-operator:v1.16.10
         - name: mongodb
-          image: mongo:8.3.1
+          image: mongo:9.0.2
+          whitelisted: true
         - name: mongodb-exporter
-          image: percona/mongodb_exporter:0.51.0
+          image: percona/mongodb_exporter:0.53.0
+          whitelisted: true
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Documentation
@@ -159,15 +167,15 @@ entries:
         fingerprint: F1A6893583E632A757FF6767F3CC8C6AEC9CEB08
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
-    appVersion: 1.16.9
-    created: '2026-10-06T02:42:00.647426731Z'
+    appVersion: 1.16.10
+    created: '2026-10-06T02:50:24.082049761Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for MongoDB — ReplicaSets, Sharded Clusters
       with auto scale-out, S3/PVC Backup, TLS, and LDAP. MIT licensed.
-    digest: 2c678805bc126868716facaf5808da224cf5bc89556c33868b0cbd1a25cc8b4b
+    digest: e8d7ac98c734cb20fff0c52d641e96ef7bd94734a7b3ab20ff9f6b93007f0897
     home: https://github.com/keiailab/mongodb-operator
     icon: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/docs/branding/symbol.png
     keywords:
@@ -197,8 +205,8 @@ entries:
     - https://github.com/keiailab/mongodb-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.9
-    version: 1.16.9
+    - oci://ghcr.io/keiailab/charts/mongodb-operator:1.16.10
+    version: 1.16.10
   nodevitals:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -225,7 +233,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.9.4
-    created: '2026-10-06T02:42:00.64865346Z'
+    created: '2026-10-06T02:50:24.083211375Z'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: 3fc0ae1722bf5aee995c6abe4186e1cc38bd06205d5243bf563822531ba0d473
     home: https://github.com/keiailab/nodevitals
@@ -267,7 +275,7 @@ entries:
       artifacthub.io/operator: 'true'
     apiVersion: v2
     appVersion: v0.10.2
-    created: '2026-10-06T02:42:00.649638838Z'
+    created: '2026-10-06T02:50:24.084076768Z'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster/QdrantCollection management, distributed (Raft) clusters, automatic
       shard rebalancing, replication-factor repair, and drain-based scale-in. MIT
@@ -390,7 +398,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.2
-    created: '2026-10-06T02:42:00.653826288Z'
+    created: '2026-10-06T02:50:24.08781818Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -421,4 +429,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.2
     version: 1.5.2
-generated: '2026-10-06T02:42:00Z'
+generated: '2026-10-06T02:50:24Z'
