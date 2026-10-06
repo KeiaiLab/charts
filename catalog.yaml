@@ -6,6 +6,6 @@ charts:
   - name: valkey-operator
     version: 1.5.2
   - name: nodevitals
-    version: 0.8.6
+    version: 0.9.4
   - name: qdrant-operator
     version: 0.10.1
