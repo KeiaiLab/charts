@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.13.0
-    created: '2026-10-06T02:50:24.063545024Z'
+    created: '2026-10-06T03:41:40.219678045Z'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -168,7 +168,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.10
-    created: '2026-10-06T02:50:24.082049761Z'
+    created: '2026-10-06T03:41:40.239732632Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -233,7 +233,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 0.9.4
-    created: '2026-10-06T02:50:24.083211375Z'
+    created: '2026-10-06T03:41:40.240962352Z'
     description: Unified hardware telemetry agent for Kubernetes nodes
     digest: 3fc0ae1722bf5aee995c6abe4186e1cc38bd06205d5243bf563822531ba0d473
     home: https://github.com/keiailab/nodevitals
@@ -275,7 +275,7 @@ entries:
       artifacthub.io/operator: 'true'
     apiVersion: v2
     appVersion: v0.10.2
-    created: '2026-10-06T02:50:24.084076768Z'
+    created: '2026-10-06T03:41:40.241804215Z'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster/QdrantCollection management, distributed (Raft) clusters, automatic
       shard rebalancing, replication-factor repair, and drain-based scale-in. MIT
@@ -302,8 +302,14 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
-        - kind: fixed
-          description: "TLS cluster: announce cluster-bus port as tls-port+10000 (16380) instead of hardcoded 16379 — fixes inter-node gossip failure (cluster_state:fail / slots_ok:0) on tls-cluster deployments."
+        - kind: security
+          description: "grpc pinned to v1.83.2 — v1.84.0 (shipped in 1.5.3) is affected by GO-2026-6443."
+        - kind: security
+          description: "Go toolchain 1.26.8 and dependency bumps (x/crypto 0.57.0, x/net 0.59.0, x/text 0.42.0, x/mod 0.41.0, otel 1.45.0, cel-go 0.30.0) — fixes stdlib, x/crypto/ssh, x/mod/sumdb, grpc and otel CVEs (carried from 1.5.3)."
+        - kind: security
+          description: "auth-secret-hash pod annotation no longer holds sha256(password); it tracks the auth Secret resourceVersion. StatefulSets from 1.5.2 or older roll once after upgrade (carried from 1.5.3)."
+        - kind: changed
+          description: "Default Valkey version 9.1.2 (carried from 1.5.3)."
       artifacthub.io/containsSecurityUpdates: 'true'
       artifacthub.io/crds: |
         - kind: Valkey
@@ -341,7 +347,7 @@ entries:
             mode: Standalone
             replicas: 1
             version:
-              version: "9.1.0"
+              version: "9.1.2"
             storage:
               storageClassName: standard
               size: 5Gi
@@ -352,7 +358,7 @@ entries:
             namespace: cache
           spec:
             version:
-              version: "9.1.0"
+              version: "9.1.2"
             shards: 3
             replicasPerShard: 1
             storage:
@@ -374,9 +380,9 @@ entries:
                 name: s3-target
       artifacthub.io/images: |
         - name: valkey-operator
-          image: ghcr.io/keiailab/valkey-operator:1.5.2
+          image: ghcr.io/keiailab/valkey-operator:1.5.4
         - name: valkey
-          image: docker.io/valkey/valkey:9.1.0-alpine3.23
+          image: docker.io/valkey/valkey:9.1.2-alpine3.24
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Documentation
@@ -397,15 +403,15 @@ entries:
         - title: Keiailab Valkey Operator centered service symbol
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
-    appVersion: 1.5.2
-    created: '2026-10-06T02:50:24.08781818Z'
+    appVersion: 1.5.4
+    created: '2026-10-06T03:41:40.246100278Z'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
       version: 0.8.0
     description: A Kubernetes Operator for managing Valkey instances and Clusters
       (Redis OSS fork, BSD-licensed)
-    digest: b26c43a29f7d6bc2a1769862016c88372519172eae9deaca04ce733185031bcb
+    digest: d2543d8f91c285d934aa0976aa58f2c9f5302c0227d5f1a2c0316cc7874d8e39
     home: https://github.com/keiailab/valkey-operator
     icon: https://valkey.io/img/valkey-horizontal.svg
     keywords:
@@ -427,6 +433,6 @@ entries:
     - https://github.com/keiailab/valkey-operator
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.2
-    version: 1.5.2
-generated: '2026-10-06T02:50:24Z'
+    - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.4
+    version: 1.5.4
+generated: '2026-10-06T03:41:40Z'
