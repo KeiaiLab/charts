@@ -20,7 +20,7 @@ entries:
         url: https://raw.githubusercontent.com/keiailab/keiailab-commons/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 0.13.0
-    created: '2026-10-06T00:06:05.226503641Z'
+    created: '2026-10-06T10:46:50.755668+09:00'
     description: 'Keiailab commons Helm library chart. downstream consumer 가 공유하는
       partial helper (commonLabels / observability.serviceMonitor 등) 를 제공한다. type:
       library — consumer chart 가 dependency 로 import. '
@@ -160,7 +160,7 @@ entries:
         url: https://raw.githubusercontent.com/KeiaiLab/mongodb-operator/main/charts/keiailab-helm-signing-public.asc
     apiVersion: v2
     appVersion: 1.16.9
-    created: '2026-10-06T00:06:05.238316729Z'
+    created: '2026-10-06T10:46:50.769406+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -202,9 +202,14 @@ entries:
   nodevitals:
   - annotations:
       artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: security
+          description: Go toolchain 1.26.8, golang.org/x/crypto v0.57.0, golang.org/x/net v0.59.0 (Go stdlib and x/crypto HIGH CVEs)
+        - kind: security
+          description: Runtime base gcr.io/distroless/cc-debian13 (libssl3 HIGH CVE in cc-debian12)
       artifacthub.io/images: |
         - name: nodevitals
-          image: ghcr.io/keiailab/nodevitals:0.8.5
+          image: ghcr.io/keiailab/nodevitals:0.9.4
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Documentation
@@ -219,10 +224,10 @@ entries:
         - title: Keiailab nodevitals centered service symbol
           url: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     apiVersion: v2
-    appVersion: 0.8.5
-    created: '2026-10-06T00:06:05.238952891Z'
+    appVersion: 0.9.4
+    created: '2026-10-06T10:46:50.770243+09:00'
     description: Unified hardware telemetry agent for Kubernetes nodes
-    digest: b5cb5bb960e5021a670283e1edf2ec7c3bb2f3ea1dcf3553fa769b27c00f46b4
+    digest: 3fc0ae1722bf5aee995c6abe4186e1cc38bd06205d5243bf563822531ba0d473
     home: https://github.com/keiailab/nodevitals
     icon: https://raw.githubusercontent.com/KeiaiLab/nodevitals/main/docs/branding/symbol.png
     keywords:
@@ -246,8 +251,8 @@ entries:
     - https://github.com/keiailab/nodevitals
     type: application
     urls:
-    - oci://ghcr.io/keiailab/charts/nodevitals:0.8.6
-    version: 0.8.6
+    - oci://ghcr.io/keiailab/charts/nodevitals:0.9.4
+    version: 0.9.4
   qdrant-operator:
   - annotations:
       artifacthub.io/category: database
@@ -258,7 +263,7 @@ entries:
       artifacthub.io/operator: 'true'
     apiVersion: v2
     appVersion: v0.10.1
-    created: '2026-10-06T00:06:05.239433789Z'
+    created: '2026-10-06T10:46:50.770806+09:00'
     description: A Kubernetes Operator for the Qdrant vector database — declarative
       QdrantCluster/QdrantCollection management, distributed (Raft) clusters, automatic
       shard rebalancing, replication-factor repair, and drain-based scale-in. MIT
@@ -381,7 +386,7 @@ entries:
           url: https://raw.githubusercontent.com/KeiaiLab/valkey-operator/main/docs/branding/symbol.png
     apiVersion: v2
     appVersion: 1.5.2
-    created: '2026-10-06T00:06:05.241961082Z'
+    created: '2026-10-06T10:46:50.773761+09:00'
     dependencies:
     - name: keiailab-commons
       repository: oci://ghcr.io/keiailab/charts
@@ -412,4 +417,4 @@ entries:
     urls:
     - oci://ghcr.io/keiailab/charts/valkey-operator:1.5.2
     version: 1.5.2
-generated: '2026-10-06T00:06:05Z'
+generated: '2026-10-06T01:46:50Z'
