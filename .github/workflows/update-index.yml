@@ -13,7 +13,7 @@ on:
       - ".github/workflows/update-index.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: update-helm-index
@@ -22,9 +22,11 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # commit index.yaml
     steps:
-      - uses: actions/checkout@v6
-      - uses: azure/setup-helm@v5
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5
         with:
           version: latest
       - name: Update index.yaml
