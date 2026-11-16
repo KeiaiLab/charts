@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - "catalog.yaml"
+      - "hack/bump_catalog.py"
       - "hack/update-index.sh"
       - "hack/verify-index.sh"
       - "hack/verify-images.py"
@@ -23,25 +24,53 @@ jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # commit index.yaml
+      contents: write   # commit catalog.yaml + index.yaml
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5
         with:
           version: latest
+      # Raise catalog pins to the latest stable chart on ghcr (anonymous read).
+      # main only: a run on a feature branch must not commit a bump there.
+      - name: Bump catalog.yaml
+        id: bump
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          rc=0
+          python3 hack/bump_catalog.py || rc=$?
+
+          # 3 = some lookups failed. The other charts still ship; the last
+          # step turns the run red. Any other non-zero code is a crash.
+          if [[ "$rc" -ne 0 && "$rc" -ne 3 ]]; then
+            exit "$rc"
+          fi
+          echo "rc=$rc" >>"$GITHUB_OUTPUT"
       - name: Update index.yaml
         run: bash hack/update-index.sh
       - name: Verify index.yaml
         run: bash hack/verify-index.sh
-      - name: Commit index.yaml
+      # Reached only when verify is green: a red verify drops the bump.
+      - name: Commit catalog.yaml and index.yaml
         run: |
           set -euo pipefail
-          if git diff --quiet -- index.yaml; then
-            echo "index.yaml unchanged"
+          if git diff --quiet -- catalog.yaml index.yaml; then
+            echo "catalog.yaml and index.yaml unchanged"
             exit 0
           fi
+
+          message="chore: update Helm chart index"
+          if ! git diff --quiet -- catalog.yaml; then
+            message="chore(catalog): bump charts to latest ghcr release"
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.yaml
-          git commit -m "chore: update Helm chart index"
+          git add catalog.yaml index.yaml
+          git commit -m "$message"
           git push
+      - name: Fail on skipped chart lookups
+        if: steps.bump.outputs.rc == '3'
+        run: |
+          echo "::error::bump_catalog.py could not read some charts from ghcr (see Bump catalog.yaml)"
+          exit 1
