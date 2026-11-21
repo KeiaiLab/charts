@@ -2,7 +2,7 @@ charts:
   - name: keiailab-commons
     version: 0.13.0
   - name: mongodb-operator
-    version: 1.16.16
+    version: 1.16.18
   - name: valkey-operator
     version: 1.5.5
   - name: nodevitals
